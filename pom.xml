@@ -2,12 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.edurekademo.tutorial</groupId>
-    <artifactId>addressbook</artifactId>
-    <packaging>war</packaging>
-    <version>2.0</version>
-    <name>Vaadin Addressbook example</name>
+    <parent>
+      <groupId>com.edurekademo.tutorial</groupId>
+      <artifactId>addressbook</artifactId>
+      <packaging>war</packaging>
+      <version>2.0</version>
+      <name>Vaadin Addressbook example</name>
+    </parent>
 
+    
+	
+    <artifactId>maven-deploy-plugin</artifactId>
+    <version>3.0.1-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>Apache Maven Deploy Plugin</name>
+    <description>Uploads the project artifacts to the internal remote repository.</description>
+    <inceptionYear>2004</inceptionYear>
+
+    <prerequisites>
+      <maven>${mavenVersion}</maven>
+    </prerequisites>
+	
+	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -157,23 +174,7 @@
 
 		</dependencies>
 
-    <build>
-	<pluginManagement>
-	<plugins>
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-deploy-plugin</artifactId>
-		    <version>3.0.0-M1</version>
-		</plugin>
-	</plugins>
-	</pluginManagement>
-	<plugins>
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-deploy-plugin</artifactId>
-		    <version>3.0.0-M1</version>
-		</plugin>
-	</plugins>
+    <build>	
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -280,6 +281,28 @@
                 </plugins>
             </build>
         </profile>
+	      
+	<profile>
+		<id>deploy</id>
+		<build>
+			<pluginManagement>
+				<plugins>
+					<plugin>
+					    <groupId>org.apache.maven.plugins</groupId>
+					    <artifactId>maven-deploy-plugin</artifactId>
+					    <version>3.0.0-M1</version>
+					</plugin>
+				</plugins>
+			</pluginManagement>
+			<plugins>
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-deploy-plugin</artifactId>
+				    <version>3.0.0-M1</version>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
         <profile>
             <id>maven3</id>
             <activation>
